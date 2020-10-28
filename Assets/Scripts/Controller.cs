@@ -98,8 +98,8 @@ public class Controller : MonoBehaviour
         resetBtn.interactable = false;
 
     }
-    public void SwitchColor(Sprite _sprite, int _order)
+    public void SwitchColor(Sprite _sprite, int _order, GameObject _targetBG)
     {
-        bg[_order].GetComponent<SpriteRenderer>().sprite = _sprite;
+        _targetBG.GetComponent<SpriteRenderer>().sprite = _sprite;
     }
 }

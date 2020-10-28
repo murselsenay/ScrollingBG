@@ -12,7 +12,7 @@ public class Scrolling : MonoBehaviour
 
 
 
-
+    internal GameObject targetBG;
     private BoxCollider2D pieceOfBgCollider;
     private float pieceOfBgSize;
     // Start is called before the first frame update
@@ -40,21 +40,22 @@ public class Scrolling : MonoBehaviour
             {
                 if (Controller.instance.bgOrder == 0)
                 {
-                    Controller.instance.SwitchColor(Controller.instance.green, 0);
+                    Controller.instance.SwitchColor(Controller.instance.green, 0, targetBG);
                     Controller.instance.bgOrder += 1;
                     Debug.Log("Color Switched");
                 }
                 else if (Controller.instance.bgOrder == 1)
                 {
-                    Controller.instance.SwitchColor(Controller.instance.green, 1);
+                    Controller.instance.SwitchColor(Controller.instance.green, 1, targetBG);
                     Controller.instance.bgOrder = 0;
                     Controller.instance.countDown = 10;
                     Controller.instance.ResetBtnEnabled();
                     Debug.Log("Color Switched");
                 }
-               
+
             }
-           
+
+
             SwitchBGPosition();
         }
     }
@@ -65,5 +66,11 @@ public class Scrolling : MonoBehaviour
         Vector2 pieceOfBgOffset = new Vector2(0f, pieceOfBgSize * 2f);
         transform.position = (Vector2)transform.position + pieceOfBgOffset;
     }
-
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "MainCamera")
+        {
+            targetBG = gameObject;
+        }
+    }
 }
