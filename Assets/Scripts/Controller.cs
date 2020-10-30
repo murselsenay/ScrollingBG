@@ -23,6 +23,12 @@ public class Controller : MonoBehaviour
     public int countDown = 10;
     public Button resetBtn;
     internal int resetBtnStatus;
+
+    [Header("Spawn Object")]
+    public GameObject spawnObject;
+    public Transform spawnPosition;
+
+
     void Awake()
     {
         instance = this;
@@ -80,7 +86,7 @@ public class Controller : MonoBehaviour
             }
             else
             {
-                
+
                 countDown = _countDown;
                 break;
             }
@@ -91,7 +97,7 @@ public class Controller : MonoBehaviour
     public void ResetBtnEnabled()
     {
         resetBtn.interactable = true;
-        
+
     }
     public void ResetBtnDisabled()
     {
@@ -101,5 +107,10 @@ public class Controller : MonoBehaviour
     public void SwitchColor(Sprite _sprite, int _order, GameObject _targetBG)
     {
         _targetBG.GetComponent<SpriteRenderer>().sprite = _sprite;
+    }
+    public void Spawn()
+    {
+        GameObject spawnedObject = Instantiate(spawnObject, spawnPosition.position, spawnObject.transform.rotation);
+        spawnedObject.transform.position = new Vector3(spawnedObject.transform.position.x, spawnedObject.transform.position.y, -1f);
     }
 }
